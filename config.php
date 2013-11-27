@@ -1,18 +1,18 @@
 <?php
 /*
 +----------------------------------------------------------------+
-|																							|
-|	GaMerZ File Explorer Version 1.20											|
-|	Copyright (c) 2004-2008 Lester "GaMerZ" Chan							|
-|																							|
-|	File Written By:																	|
-|	- Lester "GaMerZ" Chan															|
-|	- http://lesterchan.net															|
-|																							|
-|	File Information:																	|
-|	- Configuration File																|
-|	- config.php																		|
-|																							|
+|                                                                |
+|    GaMerZ File Explorer Version 1.20                           |
+|    Copyright (c) 2004-2008 Lester "GaMerZ" Chan                |
+|                                                                |
+|    File Written By:                                            |
+|    - Lester "GaMerZ" Chan                                      |
+|    - http://lesterchan.net                                     |
+|                                                                |
+|    File Information:                                           |
+|    - Configuration File                                        |
+|    - config.php                                                |
+|                                                                |
 +----------------------------------------------------------------+
 */
 

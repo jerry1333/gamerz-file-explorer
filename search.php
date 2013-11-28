@@ -16,10 +16,9 @@
 +----------------------------------------------------------------+
 */
 
-
 ### Require Config, Setting And Function Files
 require('config.php');
-require('settings.php');
+require('class.translate.php');
 require('functions.php');
 
 ### Start Timer

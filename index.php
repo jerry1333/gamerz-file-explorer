@@ -16,10 +16,9 @@
 +----------------------------------------------------------------+
 */
 
-
 ### Require Config, Setting And Function Files
 require('config.php');
-require('settings.php');
+require('class.translate.php');
 require('functions.php');
 
 ### Start Timer
@@ -90,7 +89,7 @@ if(empty($get_sort_order)) { $get_sort_order = $default_sort_order; }
 switch($get_sort_order) {
     case 'asc':
         $sort_order = SORT_ASC;
-        $sort_order_text = 'Ascending';
+        $sort_order_text = __('asc');
         $sort_order_image = $gfe_url.'/resources/arrow_ascending.gif';
         break;
     case 'desc':
@@ -150,7 +149,7 @@ if($sort_by == 'name') {
 <!-- List Directories/Files -->
 <table cellspacing="0" cellpadding="3" style="width: 100%; border: 0px;">
     <tr>
-        <td class="Header" colspan="2" onclick="parent.location.href='<?php echo create_sort_url('name'); ?>';" onmouseover="this.style.cursor = 'pointer';" title="Sort By Name">Name&nbsp;<?php echo create_sort_image('name'); ?></td>
+        <td class="Header" colspan="2" onclick="parent.location.href='<?php echo create_sort_url('name'); ?>';" onmouseover="this.style.cursor = 'pointer';" title="Sort By Name"><?php echo __('name'); ?>&nbsp;<?php echo create_sort_image('name'); ?></td>
         <td class="Header" onclick="parent.location.href='<?php echo create_sort_url('size'); ?>';" onmouseover="this.style.cursor = 'pointer';" title="Sort By Size">Size&nbsp;<?php echo create_sort_image('size'); ?></td>
         <td class="Header" onclick="parent.location.href='<?php echo create_sort_url('type'); ?>';" onmouseover="this.style.cursor = 'pointer';" title="Sort By Type">Type&nbsp;<?php echo create_sort_image('type'); ?></td>
         <td class="Header" onclick="parent.location.href='<?php echo create_sort_url('date'); ?>';" onmouseover="this.style.cursor = 'pointer';" title="Sort By Date">Date&nbsp;<?php echo create_sort_image('date'); ?></td>

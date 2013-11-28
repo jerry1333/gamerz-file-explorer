@@ -16,6 +16,11 @@
 +----------------------------------------------------------------+
 */
 
+$translate = new translate($site_lang);
+
+function __($from) {
+    return $translate->loc($from);
+}
 
 ### Function: Start Timer
 function StartTimer() {

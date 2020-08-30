@@ -1,40 +1,54 @@
-# GaMerZ File Explorer
+[![Build Status](https://travis-ci.org/lesterchan/gamerz-file-explorer.svg?branch=master)](https://travis-ci.org/lesterchan/gamerz-file-explorer)
 
+![Logo](https://files.lesterchan.net/resources/icon.png)
+
+# GaMerZ File Explorer
 Enables you to browse a folder on the web like Windows Explorer. It has the ability to search for folders and files too.
 
 ## Installation
 
 #### Config
-* `$root_directory` - The absolute path of the folder that you want to show it's contents (without trailing slash).
+* `GFE_ROOT_DIR` - The absolute path of the folder that you want to show it's contents (without trailing slash).
  * Example: `/home/user/public_html/files`
-* `$root_url` - The URL to that folder (without trailing slash).
- * Example: `http://yoursite.com/files`
-* `$gfe_directory` - The absolute path of the folder you uploaded the files of GaMerZ File Explorer (without trailing slash).
- * Note: You Can Upload GaMerZ File Explorer Into The Same Folder As The Contents That You Want To Show.
- * Example: `/home/user/public_html/gfe`
-* `$gfe_url` - The URL to that folder (without trailing slash).
+* `GFE_ROOT_URL` - The URL to that folder (without trailing slash).
+ * Example: `http://files.yoursite.com`
+* `GFE_DIR` - The absolute path of the folder you uploaded the files of GaMerZ File Explorer (without trailing slash).
  * Note: You can upload GaMerZ File Explorer into the same folder as the contents that you want to show.
- * Example: `http://yoursite.com/gfe`
-* `$site_name` - Your site name
-* `$root_filename` - Webserver directory index. Normally you do not need to change this.
-* `$nice_url` - Search engine friendly URLs. See below.
- * Example Nice URL: `http://yoursite.com/gfe/browse/folder1/`.
- * Example Normal URL: `http://yoursite.com/gfe/index.php?dir=folder1`.
-* `$can_search` - By setting to true, you allow users to search for files in GaMerZ File Explorer.
-* `$default_sort_by` - Default sort field.
+ * Example: `/home/user/public_html/files`
+* `GFE_URL` - The URL to that folder (without trailing slash).
+ * Note: You can upload GaMerZ File Explorer into the same folder as the contents that you want to show.
+ * Example: `http://files.yoursite.com`
+* `GFE_SITE_NAME` - Your site name
+* `GFE_SITE_DESCRIPTION` - Your site description
+* `GFE_ROOT_FILENAME` - Web Server directory index. Normally you do not need to change this.
+* `GFE_NICE_URL` - Search engine friendly URLs. See below.
+ * Example Nice URL: `http://files.yoursite.com/browse/folder1/`.
+ * Example Normal URL: `http://files.yoursite.com/index.php?dir=folder1`.
+* `GFE_CAN_SEARCH` - By setting to true, you allow users to search for files in GaMerZ File Explorer.
+* `GFE_DEFAULT_SORT_BY` - Default sort field.
  * Values can be `name`, `size`, `type` or `date`.
-* `$default_sort_order` - Default sort order.
+* `GFE_DEFAULT_SORT_ORDER` - Default sort order.
  * Values can be `asc` or `desc`.
 
 #### To Enable Search Engine Friendly URLs
-* Upload '.htaccess' to the folder where you uploaded GaMerZ File Explorer.
-* Open up '.htaccess' and replace all references of `/files/` to the folder path after your domain name of `$gfe_url`.
-* Example: `$gfe_url = 'http://yoursite.com/gfe';`
-* Your should replace `/files/` To `/gfe/`
+If you are using Apache, upload `.htaccess` to the folder where you uploaded GaMerZ File Explorer.
 
-#### Upload These Files To The Directory You Specify In `$gfe_directory`
+If you are using Nginx, paste the below configuration in your nginx.conf file.
+```nginx
+location / {
+    try_files $uri $uri/ /index.php;
+}
+rewrite ^/sortby/(.+[^/])/sortorder/(.+[^/])/?$ /index.php?by=$1&order=$2 last;
+rewrite ^/browse/(.+[^/])/sortby/(.+[^/])/sortorder/(.+[^/])/?$ /index.php?dir=$1&by=$2&order=$3 last;
+rewrite ^/browse/(.+[^/])/?$ /index.php?dir=$1 last;
+rewrite ^/viewing/(.+[^/])/?$ /view.php?file=$1 last;
+rewrite ^/download/(.+[^/])/?$ /view.php?file=$1&dl=1 last;
+```
+
+#### Upload These Files To The Directory You Specify In `GFE_DIR`
 * Folder: resources
 * File: .htaccess (might be hidden)
+* File: 404.php
 * File: config.php
 * File: functions.php
 * File: index.php
@@ -44,8 +58,15 @@ Enables you to browse a folder on the web like Windows Explorer. It has the abil
 
 ## Changelog
 
-#### Version 1.20 (01-02-2006)
-* NEW: XHTML 1.1 Comptible Now
+### Version 2.0.0 Beta 2 (11-10-2018)
+* NEW: Logo by @mirzazulfan
+* NEW: Added .editorconfig and tidy up code
+
+### Version 2.0.0 Beta 1 (21-09-2015)
+* NEW: New design using Bootstrap with Font Awesome
+
+#### Version 1.2.0 (01-02-2006)
+* NEW: XHTML 1.1 Compatible Now
 
 #### Version 1.20 Beta 3 (24-10-2006)
 * FIXED: Error Displaying File Size More Than 2GB
@@ -65,7 +86,7 @@ Enables you to browse a folder on the web like Windows Explorer. It has the abil
 * FIXED: File Type Will Be 'Unknown' If File Type Is Not Registered In settings.php Instead Of Blank
 
 #### Version 1.10 (01-12-2005)
-* NEW: Now Support Nice URL Via Apache's mod_rewrite. User Can Choose To Enable/Disble Nice URL Option It In config.php
+* NEW: Now Support Nice URL Via Apache's mod_rewrite. User Can Choose To Enable/Disable Nice URL Option It In config.php
 * NEW: Rewrote The Codes That Displays The Files And Folders, Now There Will Be No '/' In Front Of Any Folders Or Files
 * NEW: settings.php Will Now Contain Most Of The Default Settings, So For Future Versions, You Do Not Need To Overwrite config.php Anymore
 * NEW: Ability To Sort By Type
@@ -78,7 +99,7 @@ Enables you to browse a folder on the web like Windows Explorer. It has the abil
 * FIXED: No More Use Of PHP Short Tag
 * FIXED: Unknown Or Undefined File Extension, The File Extension Image Will Now Be unknown.gif
 * FIXED: Invalid Checking Of Directory in view.php
-* FIXED: Grammer Mistakes For Singular And Pural
+* FIXED: Grammar Mistakes For Singular And Plural
 * FIXED: No Extension Given If There Is Spaces In The File Name That Is Being Downloaded
 
 #### Version 1.00 (09-09-2005)
